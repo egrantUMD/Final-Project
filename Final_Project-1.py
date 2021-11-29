@@ -1,13 +1,9 @@
 #!/usr/bin/python37all
-
 import PIL
 from PIL import Image
 import cgi
-import json
 import cgitb
-from urllib.request import urlopen 
-from urllib.parse import urlencode 
-import random, time
+import cv2
 
 
 cgitb.enable()
@@ -31,7 +27,13 @@ list = [a,b,c,d,e,f,g,h,i,j,k]
 for num in range(10):
   list[num] = str(list[num])
 
-photo = form["photos"]
+photo = data["photos"].file
+
+cv2.imwrite('tester.jpg', photo)
+photo = Image.open("tester.jpg")
+photo = photo.save('tester.jpg')
+
+
 
 new_width = 1
 
@@ -69,9 +71,9 @@ def pixels_to_ascii(image):
 
 def main():
     # attempt to open image from user-input
-    path = input("Enter a valid pathname to an image:\n")
+    #path = /lib/cgi-bin
     try:
-        image = photo
+        image = Image.open("tester.jpg")
     except:
         print(path, " is not a valid pathname to an image.")
         return
@@ -93,24 +95,33 @@ def main():
 # run program
 main()
 
-print("Content-type: text/html\n\n")
-print("<html>")
-print("<head>")
+print('Content-type: text/html\n\n')
+print('<html>')
+print('<head>')
 print('<div style="background:#FFFFFF;border:1px;text-align:center"> <br>')
 print('Type Writer Site')
 print('</head>')
 print('<body>')
-print('<form action="/cgi-bin/Final_Project.py" method="POST">')
+print('<form action="/cgi-bin/Final_Project-1.py" method="POST">')
 print('<div style="background:#FFFFFF;border:1px;text-align:center"> <br>')
 print('Please input all characters necessary for art <br>(Reapeats Allowed)<br>')
-print('<input type="text" name="one"> <br> <input type="text" name="two"><br> <input type="text" name="three"><br> <input type="text" name="four"><br> <input type="text" name="five"> <br> <input type="text" name="six"><br> <input type="text" name="seven"> <br> <input type="text" name="eight"> <br> <input type="text" name="nine"> <br> <input type="text" name="ten"><br> <input type="text" name="eleven"> <br>')
-
+print('<input type="text" name="one"> <br>')
+pront('<input type="text" name="two"><br>')
+print('<input type="text" name="three"><br>')
+print('<input type="text" name="four"><br>')
+print('<input type="text" name="five"> <br>') 
+print('<input type="text" name="six"><br>')
+print('<input type="text" name="seven"> <br>')
+print('<input type="text" name="eight"> <br>')
+print('<input type="text" name="nine"> <br>') 
+print('<input type="text" name="ten"><br>') 
+print('<input type="text" name="eleven"> <br>')
 print('<br>')
 print('Uploa File: <br> <br>')
 print('<input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg"> <br>')
 print('<br> <input type="submit" value="Submit">')
 print('<br>')
-print('<p><iframe src="ascii_image.txt" frameborder="0"></iframe></p>')
+print('<p> <iframe src="ascii_image.txt" frameborder="0"></iframe> </p>')
 print('<br>')
 print('</body>')
 print('</html>')
